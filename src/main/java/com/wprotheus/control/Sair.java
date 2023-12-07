@@ -1,7 +1,6 @@
 package com.wprotheus.control;
 
 import com.wprotheus.model.Funcionario;
-import com.wprotheus.utils.ValidaCampo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,10 +26,10 @@ public class Sair extends HttpServlet
 
         if (session!=null)
         {
-//            Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
-//            out.println("<h2>Volte sempre, " + usuarioLogado.getNome());
+            Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
+            out.println("<h2>Até mais, " + funcionarioLogado.getNome());
             session.invalidate();
-            out.println("<br><h3><a href='index.html'>Home</a></h3>");
+            out.println("<br><h3><a href='logar.jsp'>Home</a></h3>");
         }
         else
             out.println("<p>Você não está logado.");

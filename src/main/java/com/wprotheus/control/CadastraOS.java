@@ -1,8 +1,8 @@
 package com.wprotheus.control;
 
-import com.wprotheus.DAO.acessos.CarroDao;
 import com.wprotheus.DAO.ErroDAO;
-import com.wprotheus.model.Carro;
+import com.wprotheus.DAO.acessos.ClienteDao;
+import com.wprotheus.model.Cliente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,22 +11,21 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "cadastracarro", value = "/cadastracarro")
-public class CadastraCarro extends HttpServlet {
+@WebServlet(name = "cadastraos", value = "/cadastraos")
+public class CadastraOS extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String modelo = request.getParameter("modelo");
-        String marca = request.getParameter("marca");
-        String ano = request.getParameter("ano");
-        String placa = request.getParameter("placa");
+        String nome = request.getParameter("nome");
+        String endereco = request.getParameter("endereco");
+        String telefone = request.getParameter("telefone");
 
-        Carro novoCarro = new Carro(modelo, marca, ano, placa);
+        Cliente novoCliente = new Cliente(nome, endereco, telefone);
 
-        try (CarroDao carroDao = new CarroDao())
+        try (ClienteDao clienteDao = new ClienteDao())
         {
-            carroDao.cadastrar(novoCarro);
+            clienteDao.cadastrar(novoCliente);
             request.getRequestDispatcher("/sucesso.jsp").forward(request, response);
         } catch (ErroDAO e)
         {

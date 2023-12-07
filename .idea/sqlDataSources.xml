@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="ea0fae59-9659-4715-8680-a3a37c5a68c8" name="pf_web1@localhost Mapping">
+      <data-sources db="d6aff5a7-a20d-40e8-96f3-71fed5a2e1f3" />
+      <scope>
+        <node kind="schema" qname="pf_web1" />
+      </scope>
+    </mapping>
+  </component>
+</project>

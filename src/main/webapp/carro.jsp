@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="header.jsp"/>
 
-<h2>Cadastro de Carro</h2>
+<h1>Cadastro de Carro</h1>
 <form action="cadastracarro" method="post">
     <label for="modelo">Modelo:</label>
     <input type="text" id="modelo" name="modelo" required>

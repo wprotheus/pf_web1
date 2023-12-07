@@ -1,8 +1,10 @@
 package com.wprotheus.control;
 
-import com.wprotheus.DAO.acessos.CarroDao;
 import com.wprotheus.DAO.ErroDAO;
-import com.wprotheus.model.Carro;
+import com.wprotheus.DAO.acessos.ClienteDao;
+import com.wprotheus.DAO.acessos.FuncionarioDao;
+import com.wprotheus.model.Cliente;
+import com.wprotheus.model.Funcionario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,22 +13,21 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "cadastracarro", value = "/cadastracarro")
-public class CadastraCarro extends HttpServlet {
+@WebServlet(name = "cadastrafuncionario", value = "/cadastrafuncionario")
+public class CadastraFuncionario extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String modelo = request.getParameter("modelo");
-        String marca = request.getParameter("marca");
-        String ano = request.getParameter("ano");
-        String placa = request.getParameter("placa");
+        String nome = request.getParameter("nome");
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
 
-        Carro novoCarro = new Carro(modelo, marca, ano, placa);
+        Funcionario novoFuncionario = new Funcionario(nome, login, senha);
 
-        try (CarroDao carroDao = new CarroDao())
+        try (FuncionarioDao funcionarioDao = new FuncionarioDao())
         {
-            carroDao.cadastrar(novoCarro);
+            funcionarioDao.cadastrar(novoFuncionario);
             request.getRequestDispatcher("/sucesso.jsp").forward(request, response);
         } catch (ErroDAO e)
         {
