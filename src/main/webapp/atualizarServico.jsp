@@ -6,16 +6,18 @@
 <form action="atualizaservico" method="post">
     <input hidden name="id" value="${servico.id}">
 
-    <label for="nome">Nome (Tipo):</label>
-    <input type="text" id="nome" name="nome" value="${servico.nome}" required>
+    <label for="nome">Nome:</label>
+    <input style="width: 600px;" type="text" id="nome" name="nome" value="${servico.nome}" required><br>
 
     <label for="descricao">Descrição do Serviço:</label>
-    <textarea id="descricao" name="descricao" rows="4" value="${servico.descricao}" required></textarea>
+    <input style="width: 800px;" id="descricao" name="descricao" aria-multiline="true" value="${servico.descricao}" required><br>
 
     <label for="valor">Valor do Serviço:</label>
-    <input type="text" id="valor" name="valor" value="${servico.valor}" required>
+    <input style="width: 100px;" type="text" id="valor" name="valor" value="${servico.valor}" required><br>
 
     <button type="submit">Atualizar Serviço</button>
 </form>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="footer.jsp"/>

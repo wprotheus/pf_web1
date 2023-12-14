@@ -21,14 +21,16 @@
             <td>${relacao.idServico}</td>
             <td>${relacao.idOrdemServico}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/editarelacao?idServico=${relacao.idServico}&idOrdemServico=${relacao.idOrdemServico}">Editar</a>
+<%--                <a href="${pageContext.request.contextPath}/editarelacao?idServico=${relacao.idServico}&idOrdemServico=${relacao.idOrdemServico}">Editar</a>--%>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/deleterelacao?idServico=${relacao.idServico}&idOrdemServico=${relacao.idOrdemServico}">Deletar</a>
+<%--                <a href="${pageContext.request.contextPath}/deleterelacao?idServico=${relacao.idServico}&idOrdemServico=${relacao.idOrdemServico}">Deletar</a>--%>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="../footer.jsp"/>

@@ -20,5 +20,7 @@
 
     <button type="submit">Atualizar Carro</button>
 </form>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="footer.jsp"/>

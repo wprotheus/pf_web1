@@ -21,7 +21,7 @@
             <td>${funcionario.nome}</td>
             <td>${funcionario.login}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/editafuncionario?id=${funcionario.id}">Editar</a>
+                <a href="${pageContext.request.contextPath}/buscafuncionario?id=${funcionario.id}">Editar</a>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/deletefuncionario?id=${funcionario.id}">Deletar</a>
@@ -30,5 +30,7 @@
     </c:forEach>
     </tbody>
 </table>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="../footer.jsp"/>

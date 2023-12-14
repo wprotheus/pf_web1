@@ -32,5 +32,7 @@
     </c:forEach>
     </tbody>
 </table>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="../footer.jsp"/>

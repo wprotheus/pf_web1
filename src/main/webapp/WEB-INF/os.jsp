@@ -31,7 +31,7 @@
             <td>${ordem.cliente.id}</td> <!-- Use o atributo correto para o ID do cliente -->
             <td>${ordem.carro.id}</td> <!-- Use o atributo correto para o ID do carro -->
             <td>
-                <a href="${pageContext.request.contextPath}/editaordemservico?id=${ordem.id}">Editar</a>
+                <a href="${pageContext.request.contextPath}/buscaos?id=${ordem.id}">Editar</a>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/deleteordemservico?id=${ordem.id}">Deletar</a>
@@ -40,5 +40,7 @@
     </c:forEach>
     </tbody>
 </table>
-
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+<hr>
 <c:import url="../footer.jsp"/>
