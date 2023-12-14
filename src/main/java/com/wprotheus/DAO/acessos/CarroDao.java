@@ -1,10 +1,11 @@
 package com.wprotheus.DAO.acessos;
 
-import com.wprotheus.DAO.interfaces.CarroDaoInterface;
 import com.wprotheus.DAO.ConexaoDB;
 import com.wprotheus.DAO.ErroDAO;
+import com.wprotheus.DAO.interfaces.CarroDaoInterface;
 import com.wprotheus.model.Carro;
 import com.wprotheus.utils.StatementPool;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,11 +55,11 @@ public class CarroDao implements CarroDaoInterface {
     }
 
     @Override
-    public Carro buscarId() throws ErroDAO {
+    public Carro buscarId(int idCarro) throws ErroDAO {
         try {
-            Carro c = new Carro();
             PreparedStatement preparedStatement = connection.prepareStatement
-                    ("select * from pf_web1.tb_carro");
+                    ("select * from pf_web1.tb_carro where id=?");
+            preparedStatement.setInt(1, idCarro);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 return StatementPool.getCarro(resultSet);

@@ -1,10 +1,20 @@
 package com.wprotheus.model;
 
+import com.wprotheus.DAO.ErroDAO;
+import com.wprotheus.DAO.acessos.CarroDao;
+import com.wprotheus.DAO.acessos.ClienteDao;
+import com.wprotheus.DAO.acessos.OrdemServicoDao;
+import com.wprotheus.utils.ValidaCampo;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class OrdemServico implements Serializable {
@@ -16,12 +26,13 @@ public class OrdemServico implements Serializable {
     private BigDecimal valorTotal;
     private Carro carro;
     private Cliente cliente;
-    private Servico servico;
+    private List<OrdemServico> osServicos;
+    private List<Servico> servicoList;
 
     public OrdemServico() {
     }
 
-    public OrdemServico(int id, LocalDateTime dataEntrada, LocalDateTime dataSaida, String descServico, BigDecimal valorServico, BigDecimal valorTotal, Carro carro, Cliente cliente, Servico servico) {
+    public OrdemServico(int id, LocalDateTime dataEntrada, LocalDateTime dataSaida, String descServico, BigDecimal valorServico, BigDecimal valorTotal, Carro carro, Cliente cliente) {
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
@@ -30,10 +41,9 @@ public class OrdemServico implements Serializable {
         this.valorTotal = valorTotal;
         this.carro = carro;
         this.cliente = cliente;
-        this.servico = servico;
     }
 
-    public OrdemServico(LocalDateTime dataEntrada, LocalDateTime dataSaida, String descServico, BigDecimal valorServico, BigDecimal valorTotal, Carro carro, Cliente cliente, Servico servico) {
+    public OrdemServico(LocalDateTime dataEntrada, LocalDateTime dataSaida, String descServico, BigDecimal valorServico, BigDecimal valorTotal, Carro carro, Cliente cliente) {
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.descServico = descServico;
@@ -41,6 +51,14 @@ public class OrdemServico implements Serializable {
         this.valorTotal = valorTotal;
         this.carro = carro;
         this.cliente = cliente;
-        this.servico = servico;
+    }
+
+    public BigDecimal getValorTotal() {
+        BigDecimal valorTotal = BigDecimal.ZERO;
+
+        for (OrdemServico os : osServicos) {
+            valorTotal = valorTotal.add(os.getValorServico());
+        }
+        return valorTotal;
     }
 }

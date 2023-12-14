@@ -10,7 +10,7 @@ public interface OrdemServicoDaoInterface extends AutoCloseable {
 
     public Set<OrdemServico> buscar() throws ErroDAO;
 
-    public OrdemServico buscarId() throws ErroDAO;
+    public OrdemServico buscarId(int idOS) throws ErroDAO;
 
     public void atualizar(OrdemServico ordemServico) throws ErroDAO;
 

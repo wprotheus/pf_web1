@@ -5,7 +5,9 @@ import com.wprotheus.model.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class StatementPool {
 
@@ -20,9 +22,9 @@ public class StatementPool {
         Carro c = new Carro();
         c.setId(resultSet.getInt("id"));
         c.setModelo(resultSet.getString("modelo"));
-        c.setModelo(resultSet.getString("marca"));
-        c.setModelo(resultSet.getString("ano"));
-        c.setModelo(resultSet.getString("placa"));
+        c.setMarca(resultSet.getString("marca"));
+        c.setAno(resultSet.getString("ano"));
+        c.setPlaca(resultSet.getString("placa"));
         return c;
     }
 
@@ -57,21 +59,27 @@ public class StatementPool {
     }
 
     public static void psOrdemServico(OrdemServico ordemServico, PreparedStatement statement) throws SQLException {
-        statement.setString(1, String.valueOf(ordemServico.getDataEntrada()));
-        statement.setString(2, String.valueOf(ordemServico.getDataSaida()));
+        statement.setTimestamp(1, Timestamp.valueOf(ordemServico.getDataEntrada()));
+        statement.setTimestamp(2, Timestamp.valueOf(ordemServico.getDataSaida()));
         statement.setString(3, ordemServico.getDescServico());
-        statement.setString(4, String.valueOf(ordemServico.getValorServico()));
-        statement.setString(5, String.valueOf(ordemServico.getValorTotal()));
-        statement.setString(6, String.valueOf(ordemServico.getCarro().getId()));
-        statement.setString(7, String.valueOf(ordemServico.getCliente().getId()));
+        statement.setBigDecimal(4, ordemServico.getValorServico());
+        statement.setBigDecimal(5, ordemServico.getValorTotal());
+        statement.setInt(6, ordemServico.getCarro().getId());
+        statement.setInt(7, ordemServico.getCliente().getId());
         statement.executeUpdate();
     }
 
     public static OrdemServico getOrdemServico(ResultSet resultSet) throws SQLException {
         OrdemServico os = new OrdemServico();
         os.setId(resultSet.getInt("id"));
-        os.setDataEntrada(LocalDateTime.parse(resultSet.getString("data_entrada")));
-        os.setDataSaida(LocalDateTime.parse(resultSet.getString("data_saida")));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        Timestamp dataEntrada = resultSet.getTimestamp("data_entrada");
+        Timestamp dataSaida = resultSet.getTimestamp("2000-01-01");
+
+        os.setDataEntrada(dataEntrada.toLocalDateTime());
+        os.setDataSaida(dataSaida.toLocalDateTime());
         os.setDescServico(resultSet.getString("desc_servico"));
         os.setValorServico(resultSet.getBigDecimal("valor_servico"));
         os.setValorTotal(resultSet.getBigDecimal("valor_total"));
@@ -83,7 +91,7 @@ public class StatementPool {
     public static void psServico(Servico servico, PreparedStatement statement) throws SQLException {
         statement.setString(1, servico.getNome());
         statement.setString(2, servico.getDescricao());
-        statement.setString(3, String.valueOf(servico.getValor()));
+        statement.setBigDecimal(3, servico.getValor());
     }
 
     public static Servico getServico(ResultSet resultSet) throws SQLException {

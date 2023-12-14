@@ -7,10 +7,12 @@
 <br>
 <br>
 <br>
-<h1>Cadastro realizado com sucesso!</h1>
+<h1>Operação realizada com sucesso!</h1>
 <br>
 <br>
 <br>
 <br>
+<hr>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
 <hr>
 <c:import url="footer.jsp" />

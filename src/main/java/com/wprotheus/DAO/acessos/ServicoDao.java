@@ -28,7 +28,6 @@ public class ServicoDao implements ServicoDaoInterface {
                             PreparedStatement.RETURN_GENERATED_KEYS);
             StatementPool.psServico(servico, statement);
             statement.executeUpdate();
-
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next())
                 servico.setId(resultSet.getInt(1));
@@ -55,11 +54,12 @@ public class ServicoDao implements ServicoDaoInterface {
     }
 
     @Override
-    public Servico buscarId() throws ErroDAO {
+    public Servico buscarId(int idServico) throws ErroDAO {
         try {
             Servico s = new Servico();
             PreparedStatement preparedStatement = connection.prepareStatement
-                    ("select * from pf_web1.tb_servico");
+                    ("select * from pf_web1.tb_servico where id=?");
+            preparedStatement.setInt(1, idServico);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 return StatementPool.getServico(resultSet);
@@ -84,7 +84,15 @@ public class ServicoDao implements ServicoDaoInterface {
     }
 
     @Override
-    public void deletar(int idSer) throws ErroDAO {
+    public void deletar(int idServico) throws ErroDAO {
+        try {
+            PreparedStatement statement = connection.prepareStatement
+                    ("delete from pf_web1.tb_servico where id=?");
+            statement.setInt(1, idServico);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
     }
 
     @Override

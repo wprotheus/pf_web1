@@ -10,7 +10,7 @@ public interface CarroDaoInterface extends AutoCloseable {
 
     public Set<Carro> buscar() throws ErroDAO;
 
-    public Carro buscarId() throws ErroDAO;
+    public Carro buscarId(int idCarro) throws ErroDAO;
 
     public void atualizar(Carro carro) throws ErroDAO;
 

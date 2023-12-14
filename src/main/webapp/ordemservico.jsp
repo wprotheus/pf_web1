@@ -3,24 +3,35 @@
 <c:import url="header.jsp"/>
 
 <h1>Cadastro de Ordem de Serviço</h1>
-<form action="processaCadastroOrdem.jsp" method="post">
+<form action="cadastraos" method="post">
     <label for="dataEntrada">Data de Entrada:</label>
-    <input type="date" id="dataEntrada" name="dataEntrada" required>
+    <input type="date" id="dataEntrada" name="dataEntrada" required><br>
 
-    <label for="dataEntrega">Data de Entrega:</label>
-    <input type="date" id="dataEntrega" name="dataEntrega" required>
+    <label for="dataSaida">Data de Entrega:</label>
+    <input type="date" id="dataSaida" name="dataSaida"><br>
 
     <label for="descricaoServicos">Descrição dos Serviços:</label>
-    <textarea id="descricaoServicos" name="descricaoServicos" rows="4" required></textarea>
+    <textarea id="descricaoServicos" name="descricaoServicos" rows="2" required></textarea><br>
 
     <label for="valorUnitario">Valor Unitário do Serviço:</label>
-    <input type="text" id="valorUnitario" name="valorUnitario" required>
+    <input type="text" id="valorUnitario" name="valorUnitario" required><br>
 
     <label for="valorTotal">Valor Total da Ordem de Serviço:</label>
-    <input type="text" id="valorTotal" name="valorTotal" required>
+    <input type="text" id="valorTotal" name="valorTotal" required><br>
 
-    <label for="clienteCarroRelacionamento">Relacionamento Cliente-Carro:</label>
-    <input type="text" id="clienteCarroRelacionamento" name="clienteCarroRelacionamento" required>
+    <label>Selecione um Cliente:</label>
+    <select name="clienteId">
+        <c:forEach var="cliente" items="${listaClientes}">
+            <option value="${cliente.id}">${cliente.nome}</option>
+        </c:forEach>
+    </select>
+
+    <label>Selecione um Carro:</label>
+    <select name="carroId">
+        <c:forEach var="carro" items="${listaCarros}">
+            <option value="${carro.id}">${carro.modelo}</option>
+        </c:forEach>
+    </select><br>
 
     <button type="submit">Cadastrar Ordem de Serviço</button>
 </form>

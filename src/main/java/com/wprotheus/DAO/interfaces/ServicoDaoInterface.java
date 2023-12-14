@@ -6,15 +6,15 @@ import com.wprotheus.model.Servico;
 import java.util.Set;
 
 public interface ServicoDaoInterface extends AutoCloseable {
-    public void cadastrar(Servico servico) throws ErroDAO;
+    void cadastrar(Servico servico) throws ErroDAO;
 
-    public Set<Servico> buscar() throws ErroDAO;
+    Set<Servico> buscar() throws ErroDAO;
 
-    public Servico buscarId() throws ErroDAO;
+    Servico buscarId(int idServico) throws ErroDAO;
 
-    public void atualizar(Servico servico) throws ErroDAO;
+    void atualizar(Servico servico) throws ErroDAO;
 
-    public void deletar(int idSer) throws ErroDAO;
+    void deletar(int idServico) throws ErroDAO;
 
     @Override
     void close() throws ErroDAO;

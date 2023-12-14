@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS `pf_web1`.`tb_carro` (
                                                     `marca` VARCHAR(26) NOT NULL,
                                                     `ano` VARCHAR(4) NOT NULL,
                                                     `placa` VARCHAR(8) NOT NULL,
-                                                    PRIMARY KEY (`id`))
+                                                    PRIMARY KEY (`id`),
+                                                    UNIQUE INDEX `placa_UNIQUE` (`placa` ASC) VISIBLE)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb3;
 

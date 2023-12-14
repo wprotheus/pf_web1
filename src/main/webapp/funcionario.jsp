@@ -7,10 +7,10 @@
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
 
-    <label for="login">Endereço:</label>
+    <label for="login">Login:</label>
     <input type="text" id="login" name="login" required>
 
-    <label for="senha">Telefone:</label>
+    <label for="senha">Senha:</label>
     <input type="text" id="senha" name="senha" required>
 
     <button type="submit">Cadastrar Funcionário</button>

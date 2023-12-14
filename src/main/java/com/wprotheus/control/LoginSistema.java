@@ -4,7 +4,6 @@ import com.wprotheus.DAO.ErroDAO;
 import com.wprotheus.DAO.acessos.FuncionarioDao;
 import com.wprotheus.model.Funcionario;
 import com.wprotheus.utils.ValidaCampo;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,19 +27,16 @@ public class LoginSistema extends HttpServlet {
 
         try {
             FuncionarioDao funcionarioDao = new FuncionarioDao();
-            if (ValidaCampo.valido(login) && ValidaCampo.valido(senha))
-            {
+            if (ValidaCampo.valido(login) && ValidaCampo.valido(senha)) {
                 Funcionario funcionario = funcionarioDao.buscar(login, senha);
-                if(funcionario.getLogin().equals(login) && funcionario.getSenha().equals(senha))
-                {
+                if (funcionario.getLogin().equals(login) && funcionario.getSenha().equals(senha)) {
                     HttpSession httpSession = request.getSession();
                     httpSession.setAttribute("funcionario", funcionario);
                     response.sendRedirect("index.jsp");
-                }
-                else
+                } else
                     response.sendRedirect("login.jsp?error=invalid");
             }
-        } catch ( RuntimeException | IOException | ErroDAO e) {
+        } catch (RuntimeException | IOException | ErroDAO e) {
             throw new ErroDAO(e);
         }
     }

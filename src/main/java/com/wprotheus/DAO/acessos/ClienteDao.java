@@ -1,8 +1,8 @@
 package com.wprotheus.DAO.acessos;
 
-import com.wprotheus.DAO.interfaces.ClienteDaoInterface;
 import com.wprotheus.DAO.ConexaoDB;
 import com.wprotheus.DAO.ErroDAO;
+import com.wprotheus.DAO.interfaces.ClienteDaoInterface;
 import com.wprotheus.model.Cliente;
 import com.wprotheus.utils.StatementPool;
 
@@ -55,11 +55,12 @@ public class ClienteDao implements ClienteDaoInterface {
     }
 
     @Override
-    public Cliente buscarId() throws ErroDAO {
+    public Cliente buscarId(int idCliente) throws ErroDAO {
         try {
             Cliente c = new Cliente();
             PreparedStatement preparedStatement = connection.prepareStatement
-                    ("select * from pf_web1.tb_cliente");
+                    ("select * from pf_web1.tb_cliente where id=?");
+            preparedStatement.setInt(1, idCliente);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 return StatementPool.getCliente(resultSet);
@@ -99,6 +100,26 @@ public class ClienteDao implements ClienteDaoInterface {
     public void close() throws ErroDAO {
         try {
             connection.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+    }
+
+    public Set<Cliente> listarClientesOrdensServico() throws ErroDAO {
+        try {
+            Set<Cliente> clientesComOrdensServico = new HashSet<>();
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT DISTINCT c.* FROM pf_web1.tb_cliente c " +
+                            "JOIN pf_web1.tb_os os ON c.id = os.tb_cliente_id");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(resultSet.getInt("id"));
+                cliente.setNome(resultSet.getString("nome"));
+                clientesComOrdensServico.add(cliente);
+            }
+            return clientesComOrdensServico;
         } catch (SQLException e) {
             throw new ErroDAO(e);
         }

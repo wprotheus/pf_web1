@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class Carro implements Serializable
-{
+public class Carro implements Serializable {
     private int id;
     private String modelo;
     private String marca;
